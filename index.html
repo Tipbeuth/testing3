@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="libs/leaflet-0.7.2/leaflet.css" />
+	<link rel="stylesheet" type="text/css" href="index.css" />
+    
+	
+	
+	
+</head>
+<body>
+	<div id="map" style="width: 100%; height: 100%"></div>
+	
+	<script type="text/javascript" src="libs/leaflet-0.7.2/leaflet-src.js"></script>
+	
+	
+	<script>
+
+		var map = L.map('map');
+        
+		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id: 'tip-beuth.km61n1no'
+		}).addTo(map);
+            
+			
+		
+		
+		
+        L.polygon([
+			[52.54521, 13.35689],
+			[52.54466, 13.35591],
+			[52.54413, 13.35477],
+			[52.54324, 13.35256],
+			[52.54262, 13.35038],
+			[52.54234, 13.34956],
+			[52.54286, 13.34893],
+			[52.54413, 13.35152],
+			[52.54512, 13.35016],
+			[52.5459, 13.3516],
+			[52.54492, 13.35301],
+			[52.54609, 13.35545],
+		]).addTo(map).bindPopup("Das ist das Gelände der BHT.");
+
+		L.circle([52.54457, 13.35426], 500, {
+			color: 'red',
+			fillColor: '#f03',
+			fillOpacity: 0.1
+		}).addTo(map).bindPopup("Im Umkreis von 500m befinden sich zwei U-Bahnstationen");
+        
+		var popup = L.popup();
+
+		function onMapClick(e) {
+			popup
+				.setLatLng(e.latlng)
+				.setContent("Koordinaten an dieser Stelle " + e.latlng.toString())
+				.openOn(map);
+		}
+
+		map.on('click', onMapClick);
+		
+		function onLocationFound(e) {
+			 var radius = parseInt( e.accuracy / 2);
+
+			L.marker(e.latlng).addTo(map)
+				.bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+			L.circle(e.latlng, radius).addTo(map);
+		}
+
+		function onLocationError(e) {
+			alert(e.message);
+		}
+
+		map.on('locationfound', onLocationFound);
+		map.on('locationerror', onLocationError);
+
+		map.locate({setView: true, maxZoom: 16});
+
+
+		
+	
+    </script>
+</body>
+</html>
