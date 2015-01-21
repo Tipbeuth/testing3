@@ -1,0 +1,14 @@
+<widget id="com.example.hello" version="0.0.1">
+        <name>Leaflet</name>
+       
+		<description>
+            blabla
+        </description>
+        <author "Tim Lars und Philipp"
+            
+        </author>
+        <content src="index.html" />
+        <access origin="*" />
+		<icon src="icon.png" />
+        <icon src="res/icon.png"   gap:platform="android"    gap:qualifier="icon" />
+    </widget>
