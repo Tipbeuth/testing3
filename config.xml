@@ -1,6 +1,6 @@
 <widget id="com.example.hello" version="0.0.1">
         <name>Leaflet</name>
-        <icon src="icon.png" />
+        <icon src="res/icon.png" />
 		<description>
             blabla
         </description>
